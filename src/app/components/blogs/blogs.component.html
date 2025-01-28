@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="text-center">Read Our Discussions</h1>
+  <section>
+    <div class="control-buttons">
+      <button class="btn btn-primary">Latest</button>
+      <button class="btn btn-primary">Top</button>
+    </div>
+    <div class="blogs">
+      <div class="blogs-list">
+        <div *ngFor="let blog of blogs" class="blog-item">
+          <div class="blog-text">
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.slug }}</p>
+            <div class="blog-info">
+              <span>{{ blog.createdAt | dateFormat }}</span>
+              <span>•</span>
+              <span>AUTHOR</span>
+            </div>
+          </div>
+          <img src="article1.jpg" alt="text" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <mat-paginator
+    [length]="totalElements"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20, 50]"
+    (page)="handlePageEvent($event)"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>

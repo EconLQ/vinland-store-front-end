@@ -1,0 +1,51 @@
+.control-buttons {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px;
+}
+.control-buttons > button {
+  margin: 0px 10px;
+}
+
+.blogs {
+  flex: 2;
+}
+.blogs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.blog-item {
+  display: flex;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  align-items: center;
+  gap: 15px;
+}
+.blog-item img {
+  width: 120px;
+  height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.blog-text {
+  flex: 1;
+}
+.blog-text h2 {
+  margin: 0 0 5px;
+  font-size: 1.2em;
+}
+.blog-text p {
+  margin: 0 0 5px;
+  color: #555;
+}
+.blog-info {
+  display: flex;
+  color: #999;
+}
+
+.blog-info span {
+  margin-right: 10px;
+}
