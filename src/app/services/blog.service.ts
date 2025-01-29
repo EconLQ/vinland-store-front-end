@@ -2,9 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Blog } from '../common/blog';
-import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment.development';
 import { BlogsPageResponse } from '../interfaces/blog-page-response';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
