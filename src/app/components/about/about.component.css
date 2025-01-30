@@ -1,0 +1,21 @@
+figure {
+  width: 70%;
+  text-align: center;
+  margin: auto;
+}
+p {
+  text-align: justify;
+}
+
+h3 {
+  margin-top: 1em;
+}
+.about-section {
+  width: 50%;
+  margin: auto;
+  margin-top: 2em;
+  line-height: 1.6em;
+}
+#about-text {
+  border-bottom: 1px solid #ddd;
+}

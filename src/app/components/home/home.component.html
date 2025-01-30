@@ -1,0 +1,57 @@
+<main>
+  <!-- For Home component -->
+  <div id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          class="nav-link active"
+          aria-current="page"
+          href="/"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/blogs"
+          routerLinkActive="active"
+          class="nav-link active"
+          href="blogs"
+          aria-current="page"
+          >Archieve</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/about"
+          routerLinkActive="active"
+          class="nav-link active"
+          aria-current="page"
+          href="about"
+          >About</a
+        >
+      </li>
+    </ul>
+  </div>
+  <!-- <section class="featured">
+      <img src="featured-image.jpg" alt="Featured" />
+      <div class="featured-text">
+        <h1>Placeholder for a Featured Blog</h1>
+        <p>some text</p>
+        <span>date - author</span>
+      </div>
+    </section> -->
+
+  <section class="content">
+    <app-blogs></app-blogs>
+    <aside class="sidebar">
+      <div class="subscription-box">
+        <h3>Vinland Store</h3>
+        <p>This is a blog on why we believe and do what we do...</p>
+        <input type="email" placeholder="Type your email..." />
+        <button>Subscribe</button>
+      </div>
+    </aside>
+  </section>
+</main>
