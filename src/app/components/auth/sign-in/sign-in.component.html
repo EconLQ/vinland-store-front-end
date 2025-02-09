@@ -1,0 +1,53 @@
+<!-- <div *ngIf="showErrorMessage" id="invalid-creds-msg">
+  <span>Nice try, lad, but the username or password may be wrong</span><br />
+  <span
+    >If you have not created an account, then you should
+    <a href="sign-up"> Sign Up </a>
+    first</span
+  >
+</div> -->
+<div id="login-form">
+  <div id="logo-image">
+    <img
+      src="assets/vinland_full_cut.webp"
+      alt="logo"
+      width="150"
+      height="auto"
+    />
+  </div>
+  <div id="form-title">
+    <h4>Login to Vinland Store</h4>
+  </div>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+    <div class="mb-3">
+      <label for="userName" class="form-label">Username</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        ngModel
+        id="userEmail"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="userPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        ngModel
+        id="userPassword"
+      />
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1"
+        >Sell my data to saudis</label
+      >
+    </div>
+    <div id="submit-btn">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
