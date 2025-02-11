@@ -1,0 +1,41 @@
+#signUp-form {
+  display: table;
+  color: #000;
+  margin: auto;
+  width: 30vw;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+#invalid-creds-msg {
+  text-align: center;
+  border: 1px solid sandybrown;
+  border-radius: 5px;
+  color: antiquewhite;
+  font-size: 1.1em;
+  margin: auto;
+  width: 50vw;
+}
+
+#submit-btn {
+  text-align: center;
+}
+
+#form-title {
+  color: #000;
+  text-align: center;
+}
+
+#logo-image {
+  margin: auto;
+  width: 50%;
+}
+
+#logo-image > img {
+  border-radius: 10px;
+}
+#error-message {
+  text-align: center;
+}

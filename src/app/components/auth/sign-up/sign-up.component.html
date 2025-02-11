@@ -1,0 +1,83 @@
+<div id="signUp-form">
+  <div id="logo-image">
+    <img
+      src="assets/vinland_full_cut.webp"
+      alt="logo"
+      width="150"
+      height="auto"
+    />
+  </div>
+  <div id="form-title">
+    <h4>Sign Up to Vinland Store</h4>
+  </div>
+  <div id="login-info-text">
+    <a href="/sign-in">Already have an account?</a>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" id="error-message">
+    {{ errorMessage }}
+  </div>
+  <form #signUpForm="ngForm" (ngSubmit)="register(signUpForm)">
+    <div class="mb-3">
+      <label for="userName" class="form-label">Username</label>
+      <input
+        type="text"
+        name="username"
+        class="form-control"
+        ngModel
+        id="username"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input
+        type="text"
+        name="firstName"
+        class="form-control"
+        ngModel
+        id="userFirstName"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input
+        type="text"
+        name="lastName"
+        class="form-control"
+        ngModel
+        id="userLastName"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="userEmail" class="form-label">Email</label>
+      <input
+        type="email"
+        name="email"
+        class="form-control"
+        ngModel
+        id="userEmail"
+        aria-describedby="emailHelp"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="userPassword" class="form-label">Password</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        ngModel
+        id="userPassword"
+      />
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1"
+        >Remember me (please)</label
+      >
+    </div>
+    <div id="submit-btn">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
