@@ -1,21 +1,40 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { LoginResponse } from '../../../common/login-response';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.css',
 })
 export class SignInComponent {
-  constructor(private authService: AuthService) {}
+  errorMessage: string = '';
+  isLoggedIn: boolean = false;
+  constructor(private authService: AuthService, private rotuer: Router) {}
 
   protected login(loginForm: NgForm) {
-    console.log(
+    console.debug(
       `Login form data: ${loginForm.value.email}: ${loginForm.value.password}`
     );
-    this.authService.login({ ...loginForm.value });
+    this.authService.login({ ...loginForm.value }).subscribe(
+      (response: LoginResponse) => {
+        if (response) {
+          this.isLoggedIn = true;
+          this.rotuer.navigateByUrl('/');
+        }
+      },
+      (error) => {
+        if (error.status === 401) {
+          this.errorMessage = error.error.message;
+          console.log(this.errorMessage);
+        }
+        console.log('Error logging in: ', error);
+      }
+    );
   }
 }

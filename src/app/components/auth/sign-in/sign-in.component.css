@@ -36,3 +36,6 @@
 #logo-image > img {
   border-radius: 10px;
 }
+#error-message {
+  text-align: center;
+}

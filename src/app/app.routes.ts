@@ -27,11 +27,11 @@ export const routes: Routes = [
         (m) => m.SignInComponent
       ),
   },
-  // {
-  //   path: 'sign-up',
-  //   loadComponent: () =>
-  //     import('./components/auth/sign-up/sign-up.component').then(
-  //       (m) => m.SignUpComponent
-  //     ),
-  // },
+  {
+    path: 'sign-up',
+    loadComponent: () =>
+      import('./components/auth/sign-up/sign-up.component').then(
+        (m) => m.SignUpComponent
+      ),
+  },
 ];

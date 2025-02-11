@@ -1,11 +1,4 @@
-<!-- <div *ngIf="showErrorMessage" id="invalid-creds-msg">
-  <span>Nice try, lad, but the username or password may be wrong</span><br />
-  <span
-    >If you have not created an account, then you should
-    <a href="sign-up"> Sign Up </a>
-    first</span
-  >
-</div> -->
+<!-- Display error message -->
 <div id="login-form">
   <div id="logo-image">
     <img
@@ -17,6 +10,9 @@
   </div>
   <div id="form-title">
     <h4>Login to Vinland Store</h4>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger" id="error-message">
+    {{ errorMessage }}
   </div>
   <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
     <div class="mb-3">
