@@ -25,9 +25,3 @@ export class BlogService {
     });
   }
 }
-
-interface GetResponse {
-  _embedded: {
-    blogs: Blog[];
-  };
-}
