@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 
@@ -10,11 +10,26 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
-  loggedIn: boolean = this.authService.isLoggedIn;
-  constructor(private authService: AuthService) {}
+export class HeaderComponent implements OnInit {
+  loggedIn: boolean = false;
+  constructor(private authService: AuthService, private rotuer: Router) {}
+
+  ngOnInit(): void {
+    this.authService.authStatus$.subscribe((status) => {
+      this.loggedIn = status;
+    });
+  }
 
   logout() {
-    this.authService.signOut();
+    this.authService.signOut().subscribe(
+      (response) => {
+        console.log(response);
+        this.loggedIn = false;
+        this.rotuer.navigateByUrl('/sign-in');
+      },
+      (error) => {
+        console.log('Error logging out: ', error);
+      }
+    );
   }
 }

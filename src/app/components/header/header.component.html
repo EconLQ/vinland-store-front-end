@@ -37,7 +37,7 @@
             >Sign Up</a
           >
         </div>
-        <div>
+        <div *ngIf="loggedIn">
           <button type="button" class="btn btn-primary" (click)="logout()">
             Log Out
           </button>

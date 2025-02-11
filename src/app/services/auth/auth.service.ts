@@ -1,17 +1,15 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginResponse } from '../../common/login-response';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { UserSignUpRequest } from '../../common/user-sign-up-request';
-import { log } from 'console';
 import { Observable } from 'rxjs/internal/Observable';
+import { BehaviorSubject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn: boolean = false;
   private authBaseUrl = `${environment.apiBaseUrl}/auth`;
   private headersOptions = {
     withCredentials: true, // include cookies with the request
@@ -20,8 +18,10 @@ export class AuthService {
       'application/x-www-form-urlencoded'
     ),
   };
-
-  constructor(private httpClient: HttpClient, private rotuer: Router) {}
+  // store auth state
+  private authStatus = new BehaviorSubject<boolean>(false);
+  public authStatus$ = this.authStatus.asObservable(); // expose auth status as observable
+  constructor(private httpClient: HttpClient) {}
 
   public login(loginData: {
     email: string;
@@ -30,11 +30,13 @@ export class AuthService {
     const payload = new HttpParams()
       .set('email', loginData.email)
       .set('password', loginData.password);
-    return this.httpClient.post<LoginResponse>(
-      `${this.authBaseUrl}/sign-in`,
-      payload,
-      this.headersOptions
-    );
+    return this.httpClient
+      .post<LoginResponse>(
+        `${this.authBaseUrl}/sign-in`,
+        payload,
+        this.headersOptions
+      )
+      .pipe(tap(() => this.authStatus.next(true))); // update auth status
   }
   public register(signUpRequest: UserSignUpRequest): Observable<void> {
     const payload = new HttpParams()
@@ -50,20 +52,11 @@ export class AuthService {
       this.headersOptions
     );
   }
-  public signOut() {
+  public signOut(): Observable<string> {
     return this.httpClient
       .post<string>(`${this.authBaseUrl}/logout`, null, {
         withCredentials: true,
       })
-      .subscribe(
-        (response) => {
-          console.log(response);
-          this.isLoggedIn = false;
-          this.rotuer.navigateByUrl('/sign-in');
-        },
-        (error) => {
-          console.log('Error logging out: ', error);
-        }
-      );
+      .pipe(tap(() => this.authStatus.next(false)));
   }
 }
