@@ -8,7 +8,7 @@
         width="55"
         height="auto"
       />
-      <a routerLink="/" class="navbar-brand" href="/">Vinland Store</a>
+      <a routerLink="/" class="navbar-brand">Vinland Store</a>
       <div id="right-side-action-buttons">
         <div class="search-icon">
           <!-- <button type="button" style="outline: none"> -->
@@ -28,7 +28,19 @@
           <button class="btn btn-primary">Upgrade to paid</button>
         </div>
         <div>
-          <a href="/sign-in">Sign In</a>
+          <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="sign-in"
+            >Sign In</a
+          >
+        </div>
+        <div>
+          <a *ngIf="!loggedIn" routerLinkActive="active" routerLink="sign-up"
+            >Sign Up</a
+          >
+        </div>
+        <div>
+          <button type="button" class="btn btn-primary" (click)="logout()">
+            Log Out
+          </button>
         </div>
       </div>
     </div>
