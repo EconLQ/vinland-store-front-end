@@ -18,21 +18,27 @@ export class BlogsComponent implements OnInit {
   pageSize = 5;
   pageIndex = 0;
   totalElements = 0;
+  errorMessage: string = '';
 
   constructor(private blogService: BlogService) {}
   ngOnInit(): void {
     this.loadBlogs();
   }
   loadBlogs() {
-    this.blogService
-      .getBlogs(this.pageIndex, this.pageSize)
-      .subscribe((response) => {
-        console.log(`Response from /api/v1/blogs: ${response}`);
+    this.blogService.getBlogs(this.pageIndex, this.pageSize).subscribe(
+      (response) => {
         this.blogs = response._embedded.blogs;
         this.totalElements = response.page.totalElements;
         this.pageSize = response.page.size;
         this.pageIndex = response.page.number;
-      });
+      },
+      (error) => {
+        if (error.status == 403) {
+          this.errorMessage = 'Failed to authorize user. Please log in.';
+        }
+        console.log(error);
+      }
+    );
   }
   handlePageEvent(event: PageEvent) {
     this.pageIndex = event.pageIndex;
