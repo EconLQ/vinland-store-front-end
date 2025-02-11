@@ -1,0 +1,11 @@
+.blog-main {
+  width: 50%;
+  margin: auto;
+}
+#date-text,
+#view-counter {
+  font-style: italic;
+}
+#tags {
+  font-weight: bold;
+}

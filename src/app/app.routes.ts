@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'archive/:id',
+    loadComponent: () =>
+      import('./components/blogs/blog-details/blog-details.component').then(
+        (m) => m.BlogDetailsComponent
+      ),
+  },
+  {
     path: '',
     loadComponent: () =>
       import('./components/home/home.component').then((m) => m.HomeComponent),

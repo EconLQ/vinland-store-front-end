@@ -1,0 +1,16 @@
+<div class="blog-main">
+  <div *ngIf="blog; else notFound">
+    <h2>{{ blog?.title }}</h2>
+    <p id="date-text">Published on: {{ blog.createdAt | dateFormat }}</p>
+    <p id="tags">Tags: {{ blog?.tags }}</p>
+    <p id="post-body">{{ blog?.body }}</p>
+    <p id="view-counter">View: {{ blog?.viewCount }}</p>
+    <a routerLink="/archive">Back to Archieve</a>
+  </div>
+</div>
+
+<!-- Show a message if the blog is not found -->
+<ng-template #notFound>
+  <h2>Blog not found!</h2>
+  <a routerLink="archive">Go back</a>
+</ng-template>

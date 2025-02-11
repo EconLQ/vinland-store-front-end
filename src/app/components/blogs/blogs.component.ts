@@ -4,11 +4,13 @@ import { Blog } from '../../common/blog';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { DateFormatPipe } from '../../utils/date-format.pipe';
+import { RouterLink } from '@angular/router';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-blogs',
   standalone: true,
-  imports: [CommonModule, MatPaginatorModule, DateFormatPipe],
+  imports: [CommonModule, MatPaginatorModule, DateFormatPipe, RouterLink],
   providers: [BlogService],
   templateUrl: './blogs.component.html',
   styleUrl: './blogs.component.css',
@@ -44,5 +46,13 @@ export class BlogsComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadBlogs();
+  }
+
+  getBlogs(): Observable<Blog[]> {
+    return of(this.blogs);
+  }
+  getBlogById(id: number): Observable<Blog | undefined> {
+    const blog = this.blogs.find((b) => b.id === id);
+    return of(blog);
   }
 }

@@ -8,5 +8,10 @@ export interface Blog {
   viewCount: number;
   createdAt: Date; // or Date if you plan to parse it
   updatedAt: Date; // or Date if you plan to parse it
-  author: string;
+  // author: string;
+  _links: {
+    blogs: {
+      href: string;
+    };
+  };
 }

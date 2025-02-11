@@ -12,7 +12,9 @@
       <div class="blogs-list">
         <div *ngFor="let blog of blogs" class="blog-item">
           <div class="blog-text">
-            <h2>{{ blog.title }}</h2>
+            <h2>
+              <a [routerLink]="['/archive', blog.id]">{{ blog.title }}</a>
+            </h2>
             <p>{{ blog.slug }}</p>
             <div class="blog-info">
               <span>{{ blog.createdAt | dateFormat }}</span>

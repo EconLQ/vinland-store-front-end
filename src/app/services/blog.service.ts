@@ -24,4 +24,10 @@ export class BlogService {
       params,
     });
   }
+
+  getBlogById(id: number): Observable<Blog> {
+    return this.httpClient.get<Blog>(`${this.blogsUrl}/${id}`, {
+      withCredentials: true,
+    });
+  }
 }
