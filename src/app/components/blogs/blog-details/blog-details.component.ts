@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BlogService } from '../../../services/blog.service';
+import { BlogService } from '../../../services/blog/blog.service';
 import { Blog } from '../../../common/blog';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';

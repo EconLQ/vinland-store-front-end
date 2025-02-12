@@ -21,7 +21,13 @@ export class BlogService {
       .set('size', size.toString());
 
     return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
-      params: params,
+      params,
+      withCredentials: true,
+    });
+  }
+
+  getBlogById(id: number): Observable<Blog> {
+    return this.httpClient.get<Blog>(`${this.blogsUrl}/${id}`, {
       withCredentials: true,
     });
   }
