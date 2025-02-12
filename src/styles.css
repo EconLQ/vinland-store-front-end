@@ -7,3 +7,7 @@ body {
   margin: auto;
   padding: 10px;
 }
+
+::ng-deep .ngx-spinner-overlay {
+  z-index: 9999 !important;
+}

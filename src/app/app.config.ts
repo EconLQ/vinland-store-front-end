@@ -3,14 +3,25 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withFetch,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LoaderspinnerInterceptor } from './utils/loaderspinner.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideClientHydration(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(withFetch(), withInterceptorsFromDi()),
     provideAnimations(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderspinnerInterceptor,
+      multi: true,
+    },
   ],
 };
