@@ -1,8 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LoginResponse } from '../../common/login-response';
 import { environment } from '../../../environments/environment';
-import { UserSignUpRequest } from '../../common/user-sign-up-request';
+import { UserSignUpRequest } from '../../interfaces/user-sign-up-request';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, tap } from 'rxjs';
 
@@ -26,12 +25,12 @@ export class AuthService {
   public login(loginData: {
     email: string;
     password: string;
-  }): Observable<LoginResponse> {
+  }): Observable<string> {
     const payload = new HttpParams()
       .set('email', loginData.email)
       .set('password', loginData.password);
     return this.httpClient
-      .post<LoginResponse>(
+      .post<string>(
         `${this.authBaseUrl}/sign-in`,
         payload,
         this.headersOptions

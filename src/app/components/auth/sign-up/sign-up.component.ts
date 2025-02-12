@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { AuthService } from '../../../services/auth/auth.service';
-import { UserSignUpRequest } from '../../../common/user-sign-up-request';
+import { UserSignUpRequest } from '../../../interfaces/user-sign-up-request';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

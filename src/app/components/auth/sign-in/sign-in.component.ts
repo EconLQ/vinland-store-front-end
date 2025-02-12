@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { LoginResponse } from '../../../common/login-response';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -22,7 +21,7 @@ export class SignInComponent {
       `Login form data: ${loginForm.value.email}: ${loginForm.value.password}`
     );
     this.authService.login({ ...loginForm.value }).subscribe(
-      (response: LoginResponse) => {
+      (response: string) => {
         if (response) {
           this.isLoggedIn = true;
           this.rotuer.navigateByUrl('/');
