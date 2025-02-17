@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
   margin: 20px 0px;
+  background-color: #eeefee;
+  border-radius: 30px;
+  padding: 10px;
 }
 .control-buttons > button {
   margin: 0px 10px;

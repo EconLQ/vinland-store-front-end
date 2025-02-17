@@ -41,14 +41,27 @@
     </section> -->
 
   <section class="content">
-    <app-blogs></app-blogs>
-    <aside class="sidebar">
+    <div class="main-content">
+      <app-blogs></app-blogs>
+    </div>
+    <div class="container mt-5">
       <div class="subscription-box">
         <h3>Vinland Store</h3>
         <p>This is a blog on why we believe and do what we do...</p>
-        <input type="email" placeholder="Type your email..." />
+        <div class="input-group mb-3">
+          <span class="input-group-text">&#64;</span>
+          <div class="form-floating">
+            <input
+              type="email"
+              class="form-control"
+              id="floatingInputGroup"
+              placeholder="Type your email..."
+            />
+            <label for="floatingInputGroup">Email</label>
+          </div>
+        </div>
         <button>Subscribe</button>
       </div>
-    </aside>
+    </div>
   </section>
 </main>
