@@ -42,6 +42,39 @@ export class BlogsComponent implements OnInit {
       }
     );
   }
+  loadLatestBlogs() {
+    this.blogService.getLatestBlogs().subscribe(
+      (response) => {
+        this.blogs = response._embedded.blogs;
+        this.totalElements = response.page.totalElements;
+        this.pageSize = response.page.size;
+        this.pageIndex = response.page.number;
+      },
+      (error) => {
+        if (error.status == 403) {
+          this.errorMessage = 'Failed to authorize user. Please log in.';
+        }
+        console.log(error);
+      }
+    );
+  }
+
+  loadTopBlogs() {
+    this.blogService.getTopBlogs().subscribe(
+      (response) => {
+        this.blogs = response._embedded.blogs;
+        this.totalElements = response.page.totalElements;
+        this.pageSize = response.page.size;
+        this.pageIndex = response.page.number;
+      },
+      (error) => {
+        if (error.status == 403) {
+          this.errorMessage = 'Failed to authorize user. Please log in.';
+        }
+        console.log(error);
+      }
+    );
+  }
   handlePageEvent(event: PageEvent) {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;

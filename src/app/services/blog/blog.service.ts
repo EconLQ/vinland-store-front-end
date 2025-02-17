@@ -12,6 +12,20 @@ export class BlogService {
   private blogsUrl = environment.apiBaseUrl + '/blogs';
   constructor(private httpClient: HttpClient) {}
 
+  getTopBlogs(): Observable<BlogsPageResponse<Blog>> {
+    const params = new HttpParams().set('sort', 'viewCount,desc');
+    return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
+      params,
+      withCredentials: true,
+    });
+  }
+  getLatestBlogs(): Observable<BlogsPageResponse<Blog>> {
+    const params = new HttpParams().set('sort', 'createdAt,desc');
+    return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
+      params,
+      withCredentials: true,
+    });
+  }
   getBlogs(
     page: number = 0,
     size: number = 5
