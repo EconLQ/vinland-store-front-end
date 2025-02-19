@@ -1,6 +1,7 @@
 <div class="blog-main">
   <div *ngIf="blog; else notFound">
     <h2>{{ blog?.title }}</h2>
+    <p id="author-username">Author: {{ blog?.author }}</p>
     <p id="date-text">Published on: {{ blog.createdAt | dateFormat }}</p>
     <p id="tags">Tags: {{ blog?.tags }}</p>
     <p id="post-body">{{ blog?.body }}</p>
