@@ -47,3 +47,9 @@ div#right-side-action-buttons {
 nav {
   border-bottom: 1px solid #ddd;
 }
+.logged-in-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}

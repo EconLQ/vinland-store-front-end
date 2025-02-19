@@ -41,4 +41,11 @@ export const routes: Routes = [
         (m) => m.SignUpComponent
       ),
   },
+  {
+    path: 'account',
+    loadComponent: () =>
+      import('./components/edit-user/edit-user.component').then(
+        (m) => m.EditUserComponent
+      ),
+  },
 ];

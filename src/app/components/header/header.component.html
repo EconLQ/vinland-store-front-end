@@ -37,8 +37,20 @@
             >Sign Up</a
           >
         </div>
-        <div *ngIf="loggedIn">
-          <button type="button" (click)="logout()">Log Out</button>
+        <div *ngIf="loggedIn" class="logged-in-user">
+          <div>
+            <a routerLinkActive="active" routerLink="account">
+              <img
+                src="assets/viking-icon.webp"
+                alt="icon"
+                width="30"
+                height="30"
+              />
+            </a>
+          </div>
+          <div>
+            <button type="button" (click)="logout()">Log Out</button>
+          </div>
         </div>
       </div>
     </div>
