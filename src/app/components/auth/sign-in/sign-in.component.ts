@@ -29,6 +29,9 @@ export class SignInComponent {
       },
       (error) => {
         if (error.status === 401) {
+          if (error.error.message == 'Token has expired') {
+            this.authService.refreshToken().subscribe();
+          }
           this.errorMessage = error.error.message;
           console.log(this.errorMessage);
         }

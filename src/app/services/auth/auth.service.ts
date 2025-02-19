@@ -30,12 +30,15 @@ export class AuthService {
       .set('email', loginData.email)
       .set('password', loginData.password);
     return this.httpClient
-      .post<string>(
-        `${this.authBaseUrl}/sign-in`,
-        payload,
-        this.headersOptions
-      )
+      .post<string>(`${this.authBaseUrl}/sign-in`, payload, this.headersOptions)
       .pipe(tap(() => this.authStatus.next(true))); // update auth status
+  }
+  public refreshToken(): Observable<string> {
+    return this.httpClient
+      .post<string>(`${this.authBaseUrl}/refresh`, null, {
+        withCredentials: true,
+      })
+      .pipe(tap(() => this.authStatus.next(true)));
   }
   public register(signUpRequest: UserSignUpRequest): Observable<void> {
     const payload = new HttpParams()
