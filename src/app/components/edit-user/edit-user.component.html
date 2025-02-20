@@ -1,7 +1,10 @@
 <section class="edit-user-section mt-5">
   <div *ngIf="userInfo">
-    <h2>Edit User Details</h2>
-    <form>
+    <h2>Edit {{ userInfo.username }} account details</h2>
+    <div class="form-group">
+      <h4>Role: {{ userInfo.roles }}</h4>
+    </div>
+    <form #editUserForm="ngForm" (ngSubmit)="updateUser(editUserForm)">
       <div class="form-group">
         <label for="username">Username:</label>
         <input
@@ -42,26 +45,27 @@
           name="email"
         />
       </div>
-      <!-- <div class="form-group">
-        <label for="password">Password:</label>
+      <div class="form-group">
+        <label for="oldPassword">Old Password:</label>
         <input
           type="password"
-          id="password"
-          [(ngModel)]="userInfo.password"
-          name="password"
-        />
-      </div> -->
-      <div class="form-group">
-        <label for="role">Role:</label>
-        <input
           class="form-control"
-          type="text"
-          id="role"
-          [(ngModel)]="userInfo.roles"
-          name="role"
+          id="oldPassword"
+          ngModel
+          name="oldPassword"
         />
       </div>
-      <button type="submit" (click)="updateUser()">Save</button>
+      <div class="form-group">
+        <label for="newPassword">New Password:</label>
+        <input
+          type="password"
+          class="form-control"
+          id="newPassword"
+          ngModel
+          name="newPassword"
+        />
+      </div>
+      <button type="submit">Save</button>
     </form>
   </div>
 </section>

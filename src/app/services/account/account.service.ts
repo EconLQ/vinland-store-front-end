@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserInfo } from '../../common/user-info';
 import { UserUpdateRequest } from '../../interfaces/user-update-request';
@@ -26,10 +26,12 @@ export class AccountService {
       .set('email', request.email)
       .set('oldPassword', request.oldPassword)
       .set('newPassword', request.newPassword);
-    return this.httpClient.put<UserInfo>(this.accountBaseUrl, {
-      params: payload,
+    return this.httpClient.put<UserInfo>(this.accountBaseUrl, payload, {
+      headers: new HttpHeaders().set(
+        'Content-Type',
+        'application/x-www-form-urlencoded'
+      ),
       withCredentials: true,
-      'Content-Type': 'application/x-www-form-urlencoded',
     });
   }
 }

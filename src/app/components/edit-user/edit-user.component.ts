@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AccountService } from '../../services/account/account.service';
 import { UserInfo } from '../../common/user-info';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
+import { UserUpdateRequest } from '../../interfaces/user-update-request';
 
 @Component({
   selector: 'app-edit-user',
@@ -24,7 +25,23 @@ export class EditUserComponent {
       this.userInfo = data;
     });
   }
-  updateUser() {
-    throw new Error('Method not implemented.');
+  updateUser(editUserForm: NgForm) {
+    const updateUserRequest: UserUpdateRequest = {
+      username: editUserForm.value.username,
+      firstName: editUserForm.value.firstName,
+      lastName: editUserForm.value.lastName,
+      email: editUserForm.value.email,
+      oldPassword: editUserForm.value.oldPassword,
+      newPassword: editUserForm.value.newPassword,
+    };
+    this.accountSerivce.updateUserDetails(updateUserRequest).subscribe(
+      (data) => {
+        console.debug('Updating user details...');
+        // this.userInfo = data;
+      },
+      (error) => {
+        console.debug(error);
+      }
+    );
   }
 }
