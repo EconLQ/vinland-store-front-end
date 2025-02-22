@@ -4,12 +4,14 @@ import { environment } from '../../../environments/environment';
 import { UserSignUpRequest } from '../../interfaces/user-sign-up-request';
 import { Observable } from 'rxjs/internal/Observable';
 import { BehaviorSubject, tap } from 'rxjs';
+import { response } from 'express';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private authBaseUrl = `${environment.apiBaseUrl}/auth`;
+  private accessToken: string | null = null;
   private headersOptions = {
     withCredentials: true, // include cookies with the request
     headers: new HttpHeaders().set(
@@ -22,23 +24,38 @@ export class AuthService {
   public authStatus$ = this.authStatus.asObservable(); // expose auth status as observable
   constructor(private httpClient: HttpClient) {}
 
-  public login(loginData: {
-    email: string;
-    password: string;
-  }): Observable<string> {
+  login(loginData: { email: string; password: string }): Observable<any> {
     const payload = new HttpParams()
       .set('email', loginData.email)
       .set('password', loginData.password);
     return this.httpClient
-      .post<string>(`${this.authBaseUrl}/sign-in`, payload, this.headersOptions)
-      .pipe(tap(() => this.authStatus.next(true))); // update auth status
+      .post<{ access_token: string }>(
+        `${this.authBaseUrl}/sign-in`,
+        payload,
+        this.headersOptions
+      )
+      .pipe(
+        tap((response) => {
+          this.authStatus.next(true); // update auth status
+          this.accessToken = response.access_token;
+        })
+      );
   }
-  public refreshToken(): Observable<string> {
+
+  getAccessToken(): string | null {
+    return this.accessToken;
+  }
+  refreshToken(): Observable<any> {
     return this.httpClient
-      .post<string>(`${this.authBaseUrl}/refresh`, null, {
+      .post<{ access_token: string }>(`${this.authBaseUrl}/refresh`, null, {
         withCredentials: true,
       })
-      .pipe(tap(() => this.authStatus.next(true)));
+      .pipe(
+        tap((response) => {
+          this.authStatus.next(true);
+          this.accessToken = response.access_token;
+        })
+      );
   }
   public register(signUpRequest: UserSignUpRequest): Observable<void> {
     const payload = new HttpParams()
@@ -55,10 +72,14 @@ export class AuthService {
     );
   }
   public signOut(): Observable<string> {
+    this.accessToken = null;
     return this.httpClient
       .post<string>(`${this.authBaseUrl}/logout`, null, {
         withCredentials: true,
       })
       .pipe(tap(() => this.authStatus.next(false)));
+  }
+  isLoggedIn(): boolean {
+    return !!this.accessToken;
   }
 }
