@@ -13,9 +13,7 @@ export class AccountService {
   constructor(private httpClient: HttpClient) {}
 
   getCurrentUser(): Observable<UserInfo> {
-    return this.httpClient.get<UserInfo>(this.accountBaseUrl + '/me', {
-      withCredentials: true,
-    });
+    return this.httpClient.get<UserInfo>(`${this.accountBaseUrl}/me`, {});
   }
 
   updateUserDetails(request: UserUpdateRequest): Observable<UserInfo> {
@@ -31,7 +29,6 @@ export class AccountService {
         'Content-Type',
         'application/x-www-form-urlencoded'
       ),
-      withCredentials: true,
     });
   }
 }

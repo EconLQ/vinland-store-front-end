@@ -16,14 +16,12 @@ export class BlogService {
     const params = new HttpParams().set('sort', 'viewCount,desc');
     return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
       params,
-      withCredentials: true,
     });
   }
   getLatestBlogs(): Observable<BlogsPageResponse<Blog>> {
     const params = new HttpParams().set('sort', 'createdAt,desc');
     return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
       params,
-      withCredentials: true,
     });
   }
   getBlogs(
@@ -36,13 +34,10 @@ export class BlogService {
 
     return this.httpClient.get<BlogsPageResponse<Blog>>(`${this.blogsUrl}`, {
       params,
-      withCredentials: true,
     });
   }
 
   getBlogById(id: number): Observable<Blog> {
-    return this.httpClient.get<Blog>(`${this.blogsUrl}/${id}`, {
-      withCredentials: true,
-    });
+    return this.httpClient.get<Blog>(`${this.blogsUrl}/${id}`, {});
   }
 }
